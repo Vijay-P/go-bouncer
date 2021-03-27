@@ -4,13 +4,27 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"github.com/wagoodman/go-bouncer/bouncer"
 	"github.com/wagoodman/go-bouncer/bouncer/presenter"
 	"github.com/wagoodman/go-bouncer/internal/config"
+	"github.com/wagoodman/go-partybus"
 )
 
 var appConfig *config.Application
+var eventBus *partybus.Bus
+var eventSubscription *partybus.Subscription
 var configPath string
+
+func init() {
+	setCliOptions()
+
+	cobra.OnInitialize(
+		initAppConfig,
+		initEventBus,
+	)
+}
 
 func setCliOptions() {
 	rootCmd.PersistentFlags().StringVarP(&configPath, "config", "c", "", "application config file")
@@ -43,4 +57,11 @@ func initAppConfig() {
 		os.Exit(1)
 	}
 	appConfig = cfg
+}
+
+func initEventBus() {
+	eventBus = partybus.NewBus()
+	eventSubscription = eventBus.Subscribe()
+
+	bouncer.SetBus(eventBus)
 }

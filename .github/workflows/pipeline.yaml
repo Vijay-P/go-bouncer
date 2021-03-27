@@ -64,7 +64,7 @@ jobs:
         run: make bootstrap
 
       - name: Build snapshot artifacts
-        run: make ci-build-snapshot-packages
+        run: make snapshot
 
       - uses: actions/upload-artifact@master
         with:

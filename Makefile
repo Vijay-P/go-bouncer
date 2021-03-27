@@ -2,6 +2,7 @@ TMP = ./.tmp
 RESULTS = $(TMP)/results
 ASSETS = assets
 DBASSET = $(ASSETS)/licenses.db
+DIST = ./dist
 # note: go tools requires an absolute path
 BIN = $(abspath $(TMP)/bin)
 COVER_REPORT = $(RESULTS)/cover.report
@@ -52,8 +53,8 @@ bootstrap: ## Download and install all project dependencies (+ prep tooling in t
 	# install golangci-lint
 	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(BIN) v1.26.0
 	# install pkger
-	cd $(TMP) && curl -sLO https://github.com/markbates/pkger/releases/download/v0.17.0/pkger_0.17.0_Linux_x86_64.tar.gz && \
-		tar -xzvf pkger_0.17.0_Linux_x86_64.tar.gz pkger && \
+	cd $(TMP) && curl -sLo pkger.tar.gz https://github.com/markbates/pkger/releases/download/v0.17.0/pkger_0.17.0_$(shell uname)_$(shell uname -m).tar.gz && \
+		tar -xzvf pkger.tar.gz pkger && \
 		mv pkger $(BIN)
 	# install goreleaser
 	curl -sfL https://install.goreleaser.com/github.com/goreleaser/goreleaser.sh | sh -s -- -b $(BIN) v0.138.0
@@ -84,13 +85,13 @@ unit: ## Run unit tests (with coverage)
 	@echo "Coverage: $$(cat $(COVER_TOTAL))"
 	@if [ $$(echo "$$(cat $(COVER_TOTAL)) >= $(COVERAGE_THRESHOLD)" | bc -l) -ne 1 ]; then echo "$(RED)$(BOLD)Failed coverage quality gate (> $(COVERAGE_THRESHOLD)%)$(RESET)" && false; fi
 
-# The following targets are all CI related
-
-ci-build-snapshot-packages: pkged.go
+snapshot: pkged.go
 	$(BIN)/goreleaser \
 		--snapshot \
 		--skip-publish \
 		--rm-dist
+
+# The following targets are all CI related
 
 # note: since google's licenseclassifier requires the go tooling ('go list' from x/tools/go/packages) we need to use a golang image
 ci-plugs-out-test:
@@ -121,3 +122,12 @@ ci-test-windows-run:
 
 ci-release: pkged.go
 	$(BIN)/goreleaser --rm-dist
+
+# all clean-related targets
+
+.PHONY: clean
+clean: clean-dist ## Remove anything with state
+
+.PHONY: clean-dist
+clean-dist:
+	rm -rf $(DIST)

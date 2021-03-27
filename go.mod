@@ -3,29 +3,35 @@ module github.com/wagoodman/go-bouncer
 go 1.14
 
 require (
-	github.com/adrg/xdg v0.2.1
-	github.com/go-test/deep v1.0.6
-	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
-	github.com/google/go-cmp v0.4.0
-	github.com/google/licenseclassifier v0.0.0-20200402202327-879cb1424de0
-	github.com/gookit/color v1.2.5
-	github.com/hashicorp/go-multierror v1.1.0
+	github.com/adrg/xdg v0.3.2
+	github.com/fatih/color v1.9.0 // indirect
+	github.com/fsnotify/fsnotify v1.4.9 // indirect
+	github.com/go-test/deep v1.0.7
+	github.com/gobuffalo/here v0.6.2 // indirect
+	github.com/google/licenseclassifier v0.0.0-20210108172934-df6aa8a2788b
+	github.com/gookit/color v1.3.8
+	github.com/hashicorp/errwrap v1.1.0 // indirect
+	github.com/hashicorp/go-multierror v1.1.1
 	github.com/kr/text v0.2.0 // indirect
-	github.com/markbates/pkger v0.17.0
+	github.com/magiconair/properties v1.8.4 // indirect
+	github.com/markbates/pkger v0.17.1
+	github.com/mattn/go-colorable v0.1.6 // indirect
+	github.com/mitchellh/go-glint v0.0.0-20201119015200-53f6eb3bf4d2
 	github.com/mitchellh/go-homedir v1.1.0
+	github.com/mitchellh/mapstructure v1.4.1 // indirect
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
-	github.com/pelletier/go-toml v1.4.0 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
-	github.com/spf13/afero v1.2.2 // indirect
-	github.com/spf13/cobra v1.0.0
+	github.com/pelletier/go-toml v1.8.1 // indirect
+	github.com/smartystreets/assertions v1.0.0 // indirect
+	github.com/spf13/afero v1.6.0 // indirect
+	github.com/spf13/cast v1.3.1 // indirect
+	github.com/spf13/cobra v1.1.3
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
-	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/spf13/viper v1.7.0
-	github.com/stretchr/testify v1.6.1 // indirect
-	golang.org/x/mod v0.3.0 // indirect
-	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e // indirect
-	golang.org/x/tools v0.0.0-20200702044944-0cc1aa72b347
+	github.com/spf13/viper v1.7.1
+	github.com/wagoodman/go-partybus v0.0.0-20200526224238-eb215533f07d
+	github.com/wagoodman/go-progress v0.0.0-20200807221327-51d465df1451
+	golang.org/x/crypto v0.0.0-20210317152858-513c2a44f670 // indirect
+	golang.org/x/sys v0.0.0-20210320140829-1e4c9ba3b0c4 // indirect
+	golang.org/x/text v0.3.5 // indirect
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
-	gopkg.in/src-d/go-git.v4 v4.13.1
-	gopkg.in/yaml.v2 v2.3.0 // indirect
+	gopkg.in/ini.v1 v1.62.0 // indirect
 )
